@@ -1,1 +1,1 @@
-web: gunicorn wisecrack.wsgi
+web: gunicorn django_quip.wsgi
