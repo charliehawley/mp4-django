@@ -1,25 +1,27 @@
 from django.db import models
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
 
 class Crack(models.Model):
     date = models.DateTimeField(null=False, blank=False)
-    prompt = models.TextField(max_length=300, null=False, blank=False, unique=True, default="What's the crack?")
+    prompt = models.TextField(
+        max_length=300, null=False, blank=False, 
+        unique=True, default="What's the crack?")
     slug = models.SlugField(max_length=200)
 
     def __int__(self):
         return self.date
 
 
-class User(models.Model):
-    name = models.CharField(max_length=30, null=False, blank=False)
-    password = models.CharField(max_length=30, null=False, blank=False)
-    top_subs = models.IntegerField(primary_key=False)
-    avatar = CloudinaryField('image', default='placeholder')
+# class User(models.Model):
+#     name = models.CharField(max_length=30, null=False, blank=False)
+#     password = models.CharField(max_length=30, null=False, blank=False)
+#     top_subs = models.IntegerField(primary_key=False)
+#     avatar = CloudinaryField('image', default='placeholder')
 
-    def __str__(self):
-        return str(self.name)
+#     def __str__(self):
+#         return str(self.name)
 
 
 class Sub(models.Model):
