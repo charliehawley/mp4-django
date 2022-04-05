@@ -1,12 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
-from cloudinary.models import CloudinaryField
+# from cloudinary.models import CloudinaryField
 
 
-class Crack(models.Model):
+class Prompt(models.Model):
+    # id = models.IntegerField(primary_key=True)
     date = models.DateTimeField(null=False, blank=False)
     prompt = models.TextField(
-        max_length=300, null=False, blank=False, 
+        max_length=300, null=False, blank=False,
         unique=True, default="What's the crack?")
     slug = models.SlugField(max_length=200)
 
@@ -26,11 +27,12 @@ class Crack(models.Model):
 
 class Sub(models.Model):
     sub = models.TextField(max_length=150, null=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE,)
-    upvotes = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    upvotes = models.IntegerField(default=0)
+    prompt = models.ForeignKey(Prompt, default=None, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['-upvotes']
 
     def __str__(self):
-        return self.user.name
+        return str(self.user)

@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Crack, Sub
+from .models import Prompt, Sub
 
-admin.site.register(Crack)
+admin.site.register(Prompt)
 # admin.site.register(User)
 admin.site.register(Sub)
