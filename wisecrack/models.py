@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 
 
 class Prompt(models.Model):
-    # id = models.IntegerField(primary_key=True)
     date = models.DateTimeField(null=False, blank=False)
     prompt = models.TextField(
         max_length=300, null=False, blank=False,

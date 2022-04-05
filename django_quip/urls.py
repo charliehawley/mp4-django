@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from wisecrack.views import go_home
+from wisecrack import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', go_home, name='go_home')
+    path('', views.go_home, name='go_home')
 ]
