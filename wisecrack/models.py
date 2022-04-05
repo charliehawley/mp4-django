@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class Prompt(models.Model):
-    date = models.DateTimeField(null=False, blank=False)
+    date = models.DateField(null=False, blank=False)
     prompt = models.TextField(
         max_length=300, null=False, blank=False,
         unique=True, default="What's the crack?")

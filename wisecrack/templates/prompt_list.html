@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- Active Prompt -->
+            <div class="col-12">
+                <div class="row">
+                    {% for prompt in prompt_list %}
+                        <div class="card col-6">
+                            <div class="card-body">
+                                <h2><a href="#">{{ prompt.date }}</a></h2>
+                                <p>{{ prompt.prompt }}</p>
+                            </div>
+                        </div>
+                        {% for sub in sub_list %}
+                            <div class="card col-6">
+                                <div class="card-body">
+                                    <h3>{{ sub.user }}</h3>
+                                    <p>{{ sub.sub }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock content %}

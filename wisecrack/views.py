@@ -5,5 +5,5 @@ from .models import Prompt
 
 class PromptList(generic.ListView):
     model = Prompt
-    queryset = Prompt.objects.order_by('created_on')
-    template_name = 'index.html'
+    queryset = Prompt.objects.order_by('-date')
+    template_name = 'prompt_list.html'
