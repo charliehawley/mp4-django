@@ -23,7 +23,8 @@
             <div class="card col-lg-6 col-sm-12 offset-lg-3 mb-2 subs">
                 <div class="card-body p-1">
                     <p><strong>{{ sub.sub }}</strong></p>
-                    <p class="user-tag">{{ sub.user }}</p>
+                    <p class="user-tag"><strong>Author: </strong>{{ sub.user }}</p>
+                    <span><strong>Upvotes: </strong>{{ sub.number_of_upvotes }}</span>
                 </div>
             </div>
             {% endfor %}
@@ -41,9 +42,10 @@
                         {% csrf_token %}
                         <button type="submit" class="btn btn-signup btn-lg">Submit</button>
                     </form>
+                    {% else %}
+                    <p>You must <a href="{% url 'account_login' %}">login</a>/<a href="{% url 'account_signup' %}">register</a> to submit a response.</p>
                     {% endif %}
                     {% endif %}
-
                 </div>
             </div>
         </div>

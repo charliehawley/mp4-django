@@ -29,12 +29,17 @@ class Prompt(models.Model):
 class Sub(models.Model):
     sub = models.TextField(max_length=150, null=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    upvotes = models.IntegerField(default=0)
+    upvotes = models.ManyToManyField(
+        User, related_name='sub_upvote', blank=True)
+    number_of_upvotes = models.IntegerField(default=0)
     prompt = models.ForeignKey(Prompt, default=None, on_delete=models.CASCADE)
     created_on = models.DateField(auto_now=True)
 
     class Meta:
-        ordering = ['-upvotes']
+        ordering = ["-created_on"]
 
     def __str__(self):
         return str(self.user)
+
+    def number_of_upvotes(self):
+        return self.upvotes.count()
