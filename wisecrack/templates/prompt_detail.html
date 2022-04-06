@@ -8,7 +8,7 @@
         <!-- Active Prompt -->
         <div class="col-12">
             <div class="row">
-                <div class="card col-6">
+                <div class="card col-lg-6 col-sm-12 offset-lg-3 prompt">
                     <div class="card-body">
                         <h2>{{ prompt.prompt }}</h2>
                         <span>{{ prompt.date }}</span>
@@ -19,7 +19,7 @@
                 </div>
             </div>
             {% for sub in subs %}
-            <div class="card col-6 subs">
+            <div class="card col-lg-6 col-sm-12 offset-lg-3 subs">
                 <div class="card-body">
                     <p>{{ sub.sub }}</p>
                     <p>{{ sub.user }}</p>
