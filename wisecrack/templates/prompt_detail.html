@@ -25,9 +25,24 @@
                     <p><strong>{{ sub.sub }}</strong></p>
                     <p class="user-tag"><strong>Author: </strong>{{ sub.user }}</p>
                     <span><strong>Upvotes: </strong>{{ sub.number_of_upvotes }}</span>
+                    {% if user.is_authenticated %}
+                    <form class="d-inline" action="{% url 'sub_upvote' prompt.slug %}" method="POST">
+                        {% csrf_token %}
+                        {% if voted %}
+
+                        <button type="submit" name="prompt_id" value="{{prompt.slug}}" class="upvote" title="unvote">⬇</button>
+
+                        {% else %}
+
+                        <button type="submit" name="prompt_id" value="{{prompt.slug}}" class="upvote" title="upvote">⬆</button>
+
+                        {% endif %}
+                    </form>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}
+
             <div class="card col-lg-6 col-sm-12 offset-lg-3 mb-2">
                 <div class="card-body p-1">
                     {% if submitted %}

@@ -32,6 +32,9 @@ class PromptDetail(View):
         queryset = Prompt.objects
         prompt = get_object_or_404(queryset, slug=slug)
         subs = Sub.objects.order_by('created_on')
+        voted = False
+        if prompt.upvotes.filter(id=self.request.user.id).exists():
+            voted = True
 
         sub_form = SubForm(data=request.POST)
 
@@ -51,18 +54,20 @@ class PromptDetail(View):
                 "prompt": prompt,
                 "subs": subs,
                 "submitted": True,
-                "sub_form": SubForm
+                "sub_form": sub_form,
+                "voted": voted
             }
         )
 
 
 class SubUpvote(View):
+
     def post(self, request, slug):
-        sub = get_object_or_404(sub, slug=slug)
+        sub = get_object_or_404(Sub, slug=slug)
 
         if sub.upvotes.filter(id=request.user.id).exists():
             sub.upvotes.remove(request.user)
         else:
             sub.upvotes.add(request.user)
 
-        return HttpResponseRedirect(reverse(prompt_detail, args=[slug]))   
+        return HttpResponseRedirect(reverse('prompt_detail', args=[slug]))
