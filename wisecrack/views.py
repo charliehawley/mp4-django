@@ -8,6 +8,7 @@ class PromptList(generic.ListView):
     queryset = Prompt.objects.order_by('-date')
     template_name = 'prompt_list.html'
 
+
 class PromptDetail(View):
     def get(self, request, slug, *args, **kwargs):
         queryset = Prompt.objects
