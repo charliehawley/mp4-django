@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
 from .models import Prompt, Sub
+from .forms import SubForm
 
 
 class PromptList(generic.ListView):
@@ -20,6 +21,7 @@ class PromptDetail(View):
             "prompt_detail.html",
             {
                 "prompt": prompt,
-                "subs": subs
+                "subs": subs,
+                "sub_form": SubForm
             }
         )

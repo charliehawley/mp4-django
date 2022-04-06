@@ -1,6 +1,6 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
 
-{% block content %}
+{% load crispy_forms_tags %}
 
 <div class="container-fluid">
     <div class="row">
@@ -18,16 +18,31 @@
                     </div>
                 </div>
             </div>
+            <!-- Active submissions -->
             {% for sub in subs %}
-            <div class="row">
-                <div class="card col-lg-6 col-sm-12 offset-lg-3 mb-2 subs">
-                    <div class="card-body p-1">
-                        <p><strong>{{ sub.sub }}</strong></p>
-                        <p class="user-tag">{{ sub.user }}</p>
-                    </div>
+            <div class="card col-lg-6 col-sm-12 offset-lg-3 mb-2 subs">
+                <div class="card-body p-1">
+                    <p><strong>{{ sub.sub }}</strong></p>
+                    <p class="user-tag">{{ sub.user }}</p>
                 </div>
             </div>
             {% endfor %}
+            <div class="card col-lg-6 col-sm-12 offset-lg-3 mb-2">
+                <div class="card-body p-1">
+                    {% if user.is_authenticated %}
+
+                    <h3>Submit a response:</h3>
+                    <p>Posting as: {{ user.username }}</p>
+                    <form method="post">
+                        {{ sub_form | crispy }}
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-signup btn-lg">Submit</button>
+                    </form>
+
+                    {% endif %}
+
+                </div>
+            </div>
         </div>
 
     </div>
