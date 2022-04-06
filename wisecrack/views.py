@@ -22,6 +22,35 @@ class PromptDetail(View):
             {
                 "prompt": prompt,
                 "subs": subs,
+                "submitted": False,
+                "sub_form": SubForm()
+            }
+        )
+
+    def post(self, request, slug, *args, **kwargs):
+        queryset = Prompt.objects
+        prompt = get_object_or_404(queryset, slug=slug)
+        subs = Sub.objects.order_by('created_on')
+
+        sub_form = SubForm(data=request.POST)
+
+        if sub_form.is_valid():
+            sub_form.instance.user = request.user
+            sub_form.instance.name = request.user.username
+            sub = sub_form.save(commit=False)
+            sub.prompt = prompt
+            sub.save()
+        else:
+            sub_form = SubForm()
+
+        return render(
+            request,
+            "prompt_detail.html",
+            {
+                "prompt": prompt,
+                "subs": subs,
+                "submitted": True,
                 "sub_form": SubForm
             }
         )
+

@@ -29,8 +29,11 @@
             {% endfor %}
             <div class="card col-lg-6 col-sm-12 offset-lg-3 mb-2">
                 <div class="card-body p-1">
-                    {% if user.is_authenticated %}
+                    {% if submitted %}
+                    <p><strong>You have already submitted</strong></p>
+                    {% else %}
 
+                    {% if user.is_authenticated %}
                     <h3>Submit a response:</h3>
                     <p>Posting as: {{ user.username }}</p>
                     <form method="post">
@@ -38,7 +41,7 @@
                         {% csrf_token %}
                         <button type="submit" class="btn btn-signup btn-lg">Submit</button>
                     </form>
-
+                    {% endif %}
                     {% endif %}
 
                 </div>
