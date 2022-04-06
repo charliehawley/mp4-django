@@ -9,7 +9,7 @@
             <div class="col-12">
                 <div class="row">
                     {% for prompt in prompt_list %}
-                        <div class="card col-lg-6 col-sm-12 offset-lg-3">
+                        <div class="card col-lg-6 col-sm-12 offset-lg-3 mt-2">
                             <div class="card-body">
                                 <h2><a href="{% url 'prompt_detail' prompt.slug %}">{{ prompt.date }}</a></h2>
                                 <p>{{ prompt.prompt }}</p>
