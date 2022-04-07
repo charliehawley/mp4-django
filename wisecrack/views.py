@@ -71,13 +71,12 @@ class PromptDetail(View):
                     # "voted": voted
                 }
             )
-            
 
 
 class SubUpvote(View):
 
     def post(self, request, slug):
-        sub = get_object_or_404(Sub, slug=slug)
+        sub = get_object_or_404(Sub, id=id)
 
         if sub.upvotes.filter(id=request.user.id).exists():
             sub.upvotes.remove(request.user)

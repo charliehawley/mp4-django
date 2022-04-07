@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class Prompt(models.Model):
-    date = models.DateField(null=False, blank=False, auto_now=True)
+    date = models.DateField(auto_now=True)
     prompt = models.TextField(
         max_length=300, null=False, blank=False,
         unique=True, default="What's the crack?")
@@ -28,6 +28,7 @@ class Prompt(models.Model):
 
 class Sub(models.Model):
     sub = models.TextField(max_length=150, null=False)
+    slug = models.SlugField(max_length=200, default='sub_new')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     upvotes = models.ManyToManyField(
         User, related_name='sub_upvote', blank=True)

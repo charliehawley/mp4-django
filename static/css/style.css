@@ -3,3 +3,8 @@
     height: 50px;
     border-radius: 50%;
 }
+
+#reveal-content-footer {
+    clear: both;
+    height: 80px;
+}
