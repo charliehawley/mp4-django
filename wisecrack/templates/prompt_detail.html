@@ -30,11 +30,11 @@
                         {% csrf_token %}
                         {% if voted %}
 
-                        <button type="submit" name="prompt_id" value="{{prompt.slug}}" class="upvote" title="unvote">⬇</button>
+                        <button type="submit" name="prompt_id" value="{{sub}}" class="upvote" title="unvote">-</button>
 
                         {% else %}
 
-                        <button type="submit" name="prompt_id" value="{{prompt.slug}}" class="upvote" title="upvote">⬆</button>
+                        <button type="submit" name="prompt_id" value="{{sub}}" class="upvote" title="upvote">+</button>
 
                         {% endif %}
                     </form>

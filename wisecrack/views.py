@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from .models import Prompt, Sub
-from .forms import SubForm
+from .forms import SubForm, UpvoteForm
 
 
 class PromptList(generic.ListView):
@@ -47,7 +47,6 @@ class PromptDetail(View):
                     "subs": subs,
                     "submitted": False,
                     "sub_form": sub_form
-                    # "voted": voted
                 }
             )
         else:
@@ -68,7 +67,6 @@ class PromptDetail(View):
                     "subs": subs,
                     "submitted": True,
                     "sub_form": sub_form
-                    # "voted": voted
                 }
             )
 
@@ -76,8 +74,8 @@ class PromptDetail(View):
 class SubUpvote(View):
 
     def post(self, request, slug):
-        sub = get_object_or_404(Sub, id=id)
-
+        sub = get_object_or_404(Sub, user=request.user.id)
+        # if request.user.id == sub.user.id: #alert "Can't vote for your own!"
         if sub.upvotes.filter(id=request.user.id).exists():
             sub.upvotes.remove(request.user)
         else:

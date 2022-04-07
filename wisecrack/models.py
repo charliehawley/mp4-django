@@ -8,9 +8,9 @@ class Prompt(models.Model):
     prompt = models.TextField(
         max_length=300, null=False, blank=False,
         unique=True, default="What's the crack?")
-    slug = models.SlugField(max_length=200)
-    subs_total = models.ManyToManyField(
-        User, related_name='prompt_sub', blank=True)
+    slug = models.SlugField(max_length=200, unique=True)
+    # subs_total = models.ManyToManyField(
+    #     User, related_name='prompt_sub', blank=True)
 
     def __int__(self):
         return self.date
@@ -28,7 +28,8 @@ class Prompt(models.Model):
 
 class Sub(models.Model):
     sub = models.TextField(max_length=150, null=False)
-    slug = models.SlugField(max_length=200, default='sub_new')
+    # prompt_slug = models.ForeignKey(Prompt, related_name='slug', 
+    #   to_field='slug', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     upvotes = models.ManyToManyField(
         User, related_name='sub_upvote', blank=True)

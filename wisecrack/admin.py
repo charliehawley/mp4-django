@@ -14,7 +14,7 @@ class PromptAdmin(admin.ModelAdmin):
     '''
 
     prepopulated_fields = {'slug': ('prompt',)}
-    list_display = ('date', 'prompt')
+    list_display = ('date', 'prompt', 'id')
     list_filter = ('date',)
 
 
@@ -25,6 +25,5 @@ class SubAdmin(admin.ModelAdmin):
     in database.
     '''
 
-    prepopulated_fields = {'slug': ('user',)}
     list_display = ('sub', 'user', 'prompt')
     list_filter = ('prompt',)
