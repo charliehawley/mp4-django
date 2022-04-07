@@ -32,32 +32,46 @@ class PromptDetail(View):
         queryset = Prompt.objects
         prompt = get_object_or_404(queryset, slug=slug)
         subs = Sub.objects.order_by('created_on')
-        voted = False
-        if prompt.upvotes.filter(id=self.request.user.id).exists():
-            voted = True
+        submitted = False
+        if prompt.subs_total.filter(id=self.request.user.id).exists():
+            submitted = True
 
         sub_form = SubForm(data=request.POST)
 
-        if sub_form.is_valid():
-            sub_form.instance.user = request.user
-            sub_form.instance.name = request.user.username
-            sub = sub_form.save(commit=False)
-            sub.prompt = prompt
-            sub.save()
+        if submitted:
+            return render(
+                request,
+                "prompt_detail.html",
+                {
+                    "prompt": prompt,
+                    "subs": subs,
+                    "submitted": False,
+                    "sub_form": sub_form
+                    # "voted": voted
+                }
+            )
         else:
-            sub_form = SubForm()
+            if sub_form.is_valid():
+                sub_form.instance.user = request.user
+                sub_form.instance.name = request.user.username
+                sub = sub_form.save(commit=False)
+                sub.prompt = prompt
+                sub.save()
+            else:
+                sub_form = SubForm()
 
-        return render(
-            request,
-            "prompt_detail.html",
-            {
-                "prompt": prompt,
-                "subs": subs,
-                "submitted": True,
-                "sub_form": sub_form,
-                "voted": voted
-            }
-        )
+            return render(
+                request,
+                "prompt_detail.html",
+                {
+                    "prompt": prompt,
+                    "subs": subs,
+                    "submitted": True,
+                    "sub_form": sub_form
+                    # "voted": voted
+                }
+            )
+            
 
 
 class SubUpvote(View):

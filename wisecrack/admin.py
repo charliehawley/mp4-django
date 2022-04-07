@@ -1,10 +1,11 @@
 from django.contrib import admin
 from .models import Prompt, Sub
 
-admin.site.register(Prompt)
 
-
-# admin.site.register(User)
+@admin.register(Prompt)
+class PromptAdmin(admin.ModelAdmin):
+    
+    prepopulated_fields = {'slug': ('prompt',)}
 
 
 admin.site.register(Sub)
