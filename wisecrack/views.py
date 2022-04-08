@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
-from django.contrib import messages
+# from django.contrib import messages
 from .models import Prompt, Sub
 from .forms import SubForm
 
@@ -11,10 +11,19 @@ class PromptList(generic.ListView):
     queryset = Prompt.objects.order_by('-date')
     template_name = 'prompt_list.html'
 
-# class UserSubList(generic.ListView):
-#     model = Sub
-#     queryset = Sub.objects.filter(user=request.user)
-#     template_name = 'user_sub_list.html'
+
+class UserSubList(View):
+    def get(self, request, user, *args, **kwargs):
+        queryset = Sub.objects
+        # subs = get_object_or_404(queryset, number_of_upvotes=0)
+        
+        return render(
+            request,
+            "user_sub_list.html",
+            {
+                "subs": queryset
+            }
+        )
 
 
 class PromptDetail(View):
