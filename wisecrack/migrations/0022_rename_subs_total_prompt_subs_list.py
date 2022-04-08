@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RenameField(
             model_name='prompt',
-            old_name='subs_list',
+            old_name='subs_total',
             new_name='subs_list',
         ),
     ]
