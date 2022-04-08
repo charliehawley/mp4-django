@@ -84,19 +84,33 @@ class SubUpvote(View):
         # if request.user.id == sub.user.id: #alert "Can't vote for your own!"
         if sub.upvotes.filter(id=request.user.id).exists():
             sub.upvotes.remove(request.user)
+            
+            sub_form = SubForm(data=request.POST)
+
+            return render(
+                request,
+                "prompt_detail.html",
+                {
+                    "prompt": prompt,
+                    "subs": subs,
+                    "voted": False,
+                    "sub_form": sub_form
+                }
+            )
         else:
             sub.upvotes.add(request.user)
 
-        sub_form = SubForm(data=request.POST)
+            sub_form = SubForm(data=request.POST)
 
-        return render(
-            request,
-            "prompt_detail.html",
-            {
-                "prompt": prompt,
-                "subs": subs,
-                "voted": True,
-                "sub_form": sub_form
-            }
-        )
+            return render(
+                request,
+                "prompt_detail.html",
+                {
+                    "prompt": prompt,
+                    "subs": subs,
+                    "voted": True,
+                    "sub_form": sub_form
+                }
+            )
+
         # return HttpResponseRedirect(reverse('prompt_detail', args=[slug]))
