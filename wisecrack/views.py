@@ -82,21 +82,25 @@ class PromptDetail(View):
 
 class SubUpvote(View):
 
-    def post(self, request, slug, pk, *args, **kwargs):
-        queryset = Prompt.objects
-        prompt = get_object_or_404(queryset, slug=slug)
-        subs = Sub.objects.order_by('created_on')
+    def post(self, request, slug, pk, user, *args, **kwargs):
+        # queryset = Prompt.objects
+        # prompt = get_object_or_404(queryset, slug=slug)
+        # subs = Sub.objects.order_by('created_on')
         sub = get_object_or_404(Sub, pk=pk)
         # if request.user.id == sub.user.id: #alert "Can't vote for your own!"
         # if authenticated!
         # @loginrequired
-        if sub.pk == request.user.id:
+        if request.user.username == user:
             return HttpResponseRedirect(reverse('prompt_detail', args=[slug]))
         else:
             if sub.upvotes.filter(id=request.user.id).exists():
                 sub.upvotes.remove(request.user)
+                # voted = True
+                return HttpResponseRedirect(reverse('prompt_detail', args=[slug]))
             else:
                 sub.upvotes.add(request.user)
+                # voted = False
+                return HttpResponseRedirect(reverse('prompt_detail', args=[slug]))
 
             # sub_form = SubForm(data=request.POST)
 
@@ -111,4 +115,4 @@ class SubUpvote(View):
             #     }
             # )
 
-        return HttpResponseRedirect(reverse('prompt_detail', args=[slug]))
+        

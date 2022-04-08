@@ -26,7 +26,7 @@
                     <p class="user-tag"><strong>Author: </strong>{{ sub.user }}</p>
                     <span><strong>Upvotes: </strong>{{ sub.number_of_upvotes }}</span>
                     {% if user.is_authenticated %}
-                    <form class="d-inline" action="{% url 'sub_upvote' prompt.slug sub.pk %}" method="POST">
+                    <form class="d-inline" action="{% url 'sub_upvote' prompt.slug sub.pk sub.user %}" method="POST">
                         {% csrf_token %}
                         {% if voted %}
 
