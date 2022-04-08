@@ -16,6 +16,9 @@ class PromptDetail(View):
         queryset = Prompt.objects
         prompt = get_object_or_404(queryset, slug=slug)
         subs = Sub.objects.order_by('created_on')
+        submitted = False
+        if prompt.subs_list.filter(id=self.request.user.id).exists():
+            submitted = True
 
         return render(
             request,
@@ -23,7 +26,7 @@ class PromptDetail(View):
             {
                 "prompt": prompt,
                 "subs": subs,
-                "submitted": False,
+                "submitted": submitted,
                 "sub_form": SubForm()
             }
         )
@@ -33,7 +36,7 @@ class PromptDetail(View):
         prompt = get_object_or_404(queryset, slug=slug)
         subs = Sub.objects.order_by('created_on')
         submitted = False
-        if prompt.subs_total.filter(id=self.request.user.id).exists():
+        if prompt.subs_list.filter(id=self.request.user.id).exists():
             submitted = True
 
         sub_form = SubForm(data=request.POST)
@@ -45,7 +48,7 @@ class PromptDetail(View):
                 {
                     "prompt": prompt,
                     "subs": subs,
-                    "submitted": False,
+                    "submitted": True,
                     "sub_form": sub_form
                 }
             )
@@ -65,7 +68,7 @@ class PromptDetail(View):
                 {
                     "prompt": prompt,
                     "subs": subs,
-                    "submitted": True,
+                    "submitted": False,
                     "sub_form": sub_form
                 }
             )
@@ -74,6 +77,9 @@ class PromptDetail(View):
 class SubUpvote(View):
 
     def post(self, request, slug):
+        queryset = Prompt.objects
+        prompt = get_object_or_404(queryset, slug=slug)
+        subs = Sub.objects.order_by('created_on')
         sub = get_object_or_404(Sub, user=request.user.id)
         # if request.user.id == sub.user.id: #alert "Can't vote for your own!"
         if sub.upvotes.filter(id=request.user.id).exists():
@@ -81,4 +87,16 @@ class SubUpvote(View):
         else:
             sub.upvotes.add(request.user)
 
-        return HttpResponseRedirect(reverse('prompt_detail', args=[slug]))
+        sub_form = SubForm(data=request.POST)
+
+        return render(
+            request,
+            "prompt_detail.html",
+            {
+                "prompt": prompt,
+                "subs": subs,
+                "voted": True,
+                "sub_form": sub_form
+            }
+        )
+        # return HttpResponseRedirect(reverse('prompt_detail', args=[slug]))
