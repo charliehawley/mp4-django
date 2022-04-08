@@ -11,6 +11,7 @@ class Prompt(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     subs_list = models.ManyToManyField(
         User, related_name='prompt_sub', blank=True)
+    notes = models.CharField(max_length=200, null=True, blank=True)
 
     def __int__(self):
         return self.date

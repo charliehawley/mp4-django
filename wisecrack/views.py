@@ -10,6 +10,11 @@ class PromptList(generic.ListView):
     queryset = Prompt.objects.order_by('-date')
     template_name = 'prompt_list.html'
 
+class UserSubList(generic.ListView):
+    model = Sub
+    queryset = Sub.objects.order_by('-created_on')
+    template_name = 'user_sub_list.html'
+
 
 class PromptDetail(View):
     def get(self, request, slug, *args, **kwargs):
@@ -82,6 +87,7 @@ class SubUpvote(View):
         subs = Sub.objects.order_by('created_on')
         sub = get_object_or_404(Sub, user=request.user.id)
         # if request.user.id == sub.user.id: #alert "Can't vote for your own!"
+        # if authenticated! @loginrequired
         if sub.upvotes.filter(id=request.user.id).exists():
             sub.upvotes.remove(request.user)
             

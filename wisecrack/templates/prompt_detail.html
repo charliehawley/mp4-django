@@ -30,7 +30,10 @@
                         {% csrf_token %}
                         {% if voted %}
 
+                        <input type="hidden" name="sub_pk" value="{{sub.pk}}">
                         <button type="submit" name="prompt_id" value="{{sub.prompt}}" class="upvote" title="unvote">-</button>
+                        <!-- serves sub.pk make a look like button,  -->
+                        <a href="upvote/{{sub.pk}}"></a>
 
                         {% else %}
 
