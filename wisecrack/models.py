@@ -9,27 +9,15 @@ class Prompt(models.Model):
         max_length=300, null=False, blank=False,
         unique=True, default="What's the crack?")
     slug = models.SlugField(max_length=200, unique=True)
-    # subs_total = models.ManyToManyField(
-    #     User, related_name='prompt_sub', blank=True)
+    subs_list = models.ManyToManyField(
+        User, related_name='prompt_sub', blank=True)
 
     def __int__(self):
         return self.date
 
 
-# class User(models.Model):
-#     name = models.CharField(max_length=30, null=False, blank=False)
-#     password = models.CharField(max_length=30, null=False, blank=False)
-#     top_subs = models.IntegerField(primary_key=False)
-#     avatar = CloudinaryField('image', default='placeholder')
-
-#     def __str__(self):
-#         return str(self.name)
-
-
 class Sub(models.Model):
     sub = models.TextField(max_length=150, null=False)
-    # prompt_slug = models.ForeignKey(Prompt, related_name='slug', 
-    #   to_field='slug', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     upvotes = models.ManyToManyField(
         User, related_name='sub_upvote', blank=True)
