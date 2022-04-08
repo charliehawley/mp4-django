@@ -26,18 +26,21 @@
                     <p class="user-tag"><strong>Author: </strong>{{ sub.user }}</p>
                     <span><strong>Upvotes: </strong>{{ sub.number_of_upvotes }}</span>
                     {% if user.is_authenticated %}
-                    <form class="d-inline" action="{% url 'sub_upvote' prompt.slug %}" method="POST">
+                    <form class="d-inline" action="{% url 'sub_upvote' prompt.slug sub.pk %}" method="POST">
                         {% csrf_token %}
                         {% if voted %}
 
-                        <input type="hidden" name="sub_pk" value="{{sub.pk}}">
-                        <button type="submit" name="prompt_id" value="{{sub.prompt}}" class="upvote" title="unvote">-</button>
+                        <!-- <input type="hidden" name="sub_pk" value="{{sub.pk}}"> -->
+                        <button type="submit" name="sub_pk" value="{{sub.pk}}" class="upvote"
+                            title="unvote">-</button>
                         <!-- serves sub.pk make a look like button,  -->
-                        <a href="upvote/{{sub.pk}}"></a>
+                        <!-- <a href="upvote/{{sub.pk}}"></a> -->
 
                         {% else %}
 
-                        <button type="submit" name="prompt_id" value="{{sub.prompt}}" class="upvote" title="upvote">+</button>
+                        <!-- <input type="hidden" name="sub_pk" value="{{sub.pk}}"> -->
+                        <button type="submit" name="sub_pk" value="{{sub.pk}}" class="upvote"
+                            title="upvote">+</button>
 
                         {% endif %}
                     </form>
@@ -48,21 +51,22 @@
 
             <div class="card col-lg-6 col-sm-12 offset-lg-3 mb-2">
                 <div class="card-body p-1">
-                    {% if submitted %}
-                    <p><strong>You have already submitted</strong></p>
-                    {% else %}
-
                     {% if user.is_authenticated %}
-                    <h3>Submit a response:</h3>
-                    <p>Posting as: {{ user.username }}</p>
-                    <form method="post">
-                        {{ sub_form | crispy }}
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-signup btn-lg">Submit</button>
-                    </form>
+                        {% if submitted %}
+                        <p><strong>You have already submitted</strong></p>
+                        {% else %}
+
+                        <h3>Submit a response:</h3>
+                        <p>Posting as: {{ user.username }}</p>
+                        <form method="post">
+                            {{ sub_form | crispy }}
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-signup btn-lg">Submit</button>
+                        </form>
+                        {% endif %}
                     {% else %}
-                    <p>You must <a href="{% url 'account_login' %}">login</a>/<a href="{% url 'account_signup' %}">register</a> to submit a response.</p>
-                    {% endif %}
+                    <p>You must <a href="{% url 'account_login' %}">login</a>/<a
+                            href="{% url 'account_signup' %}">register</a> to submit a response.</p>
                     {% endif %}
                 </div>
             </div>

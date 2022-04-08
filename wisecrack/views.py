@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 from .models import Prompt, Sub
-from .forms import SubForm, UpvoteForm
+from .forms import SubForm
 
 
 class PromptList(generic.ListView):
@@ -10,10 +11,10 @@ class PromptList(generic.ListView):
     queryset = Prompt.objects.order_by('-date')
     template_name = 'prompt_list.html'
 
-class UserSubList(generic.ListView):
-    model = Sub
-    queryset = Sub.objects.order_by('-created_on')
-    template_name = 'user_sub_list.html'
+# class UserSubList(generic.ListView):
+#     model = Sub
+#     queryset = Sub.objects.filter(user=request.user)
+#     template_name = 'user_sub_list.html'
 
 
 class PromptDetail(View):
@@ -22,7 +23,7 @@ class PromptDetail(View):
         prompt = get_object_or_404(queryset, slug=slug)
         subs = Sub.objects.order_by('created_on')
         submitted = False
-        if prompt.subs_list.filter(id=self.request.user.id).exists():
+        if prompt.subs_list.filter(pk=self.request.user.pk).exists():
             submitted = True
 
         return render(
@@ -81,42 +82,33 @@ class PromptDetail(View):
 
 class SubUpvote(View):
 
-    def post(self, request, slug):
+    def post(self, request, slug, pk, *args, **kwargs):
         queryset = Prompt.objects
         prompt = get_object_or_404(queryset, slug=slug)
         subs = Sub.objects.order_by('created_on')
-        sub = get_object_or_404(Sub, user=request.user.id)
+        sub = get_object_or_404(Sub, pk=pk)
         # if request.user.id == sub.user.id: #alert "Can't vote for your own!"
-        # if authenticated! @loginrequired
-        if sub.upvotes.filter(id=request.user.id).exists():
-            sub.upvotes.remove(request.user)
-            
-            sub_form = SubForm(data=request.POST)
-
-            return render(
-                request,
-                "prompt_detail.html",
-                {
-                    "prompt": prompt,
-                    "subs": subs,
-                    "voted": False,
-                    "sub_form": sub_form
-                }
-            )
+        # if authenticated!
+        # @loginrequired
+        if sub.pk == request.user.id:
+            return HttpResponseRedirect(reverse('prompt_detail', args=[slug]))
         else:
-            sub.upvotes.add(request.user)
+            if sub.upvotes.filter(id=request.user.id).exists():
+                sub.upvotes.remove(request.user)
+            else:
+                sub.upvotes.add(request.user)
 
-            sub_form = SubForm(data=request.POST)
+            # sub_form = SubForm(data=request.POST)
 
-            return render(
-                request,
-                "prompt_detail.html",
-                {
-                    "prompt": prompt,
-                    "subs": subs,
-                    "voted": True,
-                    "sub_form": sub_form
-                }
-            )
+            # return render(
+            #     request,
+            #     "prompt_detail.html",
+            #     {
+            #         "prompt": prompt,
+            #         "subs": subs,
+            #         "voted": True,
+            #         "sub_form": sub_form
+            #     }
+            # )
 
-        # return HttpResponseRedirect(reverse('prompt_detail', args=[slug]))
+        return HttpResponseRedirect(reverse('prompt_detail', args=[slug]))
