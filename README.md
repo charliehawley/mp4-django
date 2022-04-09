@@ -8,6 +8,10 @@
 - upvote user id list boolean check user id presence in list to restrict user from upvoting a submission more than once.
 - upvote appends user id to list[], number of upvotes = user_upvote.length()
 
+## Known bugs
+
+- sub field remains populated after submission
+
 ## Resources
 
 - https://getbootstrap.com/docs/

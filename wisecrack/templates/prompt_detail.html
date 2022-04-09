@@ -22,23 +22,16 @@
             {% for sub in subs %}
             <div class="card col-lg-6 col-sm-12 offset-lg-3 mb-2 subs">
                 <div class="card-body p-1">
-                    <p><strong>{{ sub.sub }}</strong></p>
+                    <p><strong>"{{ sub.sub }}"</strong></p>
                     <p class="user-tag"><strong>Author: </strong>{{ sub.user }}</p>
                     <span><strong>Upvotes: </strong>{{ sub.number_of_upvotes }}</span>
                     {% if user.is_authenticated %}
                     <form class="d-inline" action="{% url 'sub_upvote' prompt.slug sub.pk sub.user %}" method="POST">
                         {% csrf_token %}
                         {% if voted %}
-
-                        <!-- <input type="hidden" name="sub_pk" value="{{sub.pk}}"> -->
                         <button type="submit" name="sub_pk" value="{{sub.pk}}" class="upvote"
                             title="unvote">-</button>
-                        <!-- serves sub.pk make a look like button,  -->
-                        <!-- <a href="upvote/{{sub.pk}}"></a> -->
-
                         {% else %}
-
-                        <!-- <input type="hidden" name="sub_pk" value="{{sub.pk}}"> -->
                         <button type="submit" name="sub_pk" value="{{sub.pk}}" class="upvote"
                             title="upvote">+</button>
 

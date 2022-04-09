@@ -13,11 +13,7 @@ class PromptList(generic.ListView):
 
 
 class UserSubList(View):
-    # model = Prompt
-    # queryset = Prompt.objects.order_by('-date')
-    # template_name = 'user_sub_list.html'
     def get(self, request, pk, *args, **kwargs):
-        # queryset = Sub.objects
         subs = Sub.objects.filter(user=pk)
 
         return render(
@@ -27,6 +23,25 @@ class UserSubList(View):
                 "subs": subs
             }
         )
+
+
+class DeleteSub(View):
+    def post(self, request, pk, prompt, *args, **kwargs):
+        subs = Sub.objects.filter(user=pk)
+        del_sub = subs.get(prompt=prompt)
+        del_sub.delete()
+
+        # delete_sub = DeleteSub(data=request.POST)
+
+        return HttpResponseRedirect(reverse('user_sub_list', args=[pk]))
+
+        # return render(
+        #     request,
+        #     "user_sub_list.html",
+        #     {
+        #         "subs": subs
+        #     }
+        # )
 
 
 class PromptDetail(View):
@@ -104,12 +119,7 @@ class PromptDetail(View):
 class SubUpvote(View):
 
     def post(self, request, slug, pk, user, *args, **kwargs):
-        # queryset = Prompt.objects
-        # prompt = get_object_or_404(queryset, slug=slug)
-        # subs = Sub.objects.order_by('created_on')
         sub = get_object_or_404(Sub, pk=pk)
-        # if request.user.id == sub.user.id: #alert "Can't vote for your own!"
-        # if authenticated!
         # @loginrequired
         if request.user.username == user:
             return HttpResponseRedirect(reverse('prompt_detail', args=[slug]))
