@@ -61,7 +61,7 @@
                         <form method="post">
                             {{ sub_form | crispy }}
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-signup btn-lg">Submit</button>
+                            <button type="submit" value="{{ user.pk }}" class="btn btn-signup btn-lg">Submit</button>
                         </form>
                         {% endif %}
                     {% else %}

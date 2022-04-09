@@ -8,10 +8,12 @@
         <!-- Prompts -->
         <div class="col-12">
             <div class="row">
+                <h1>Your submissions:</h1>
                 {% for sub in subs %}
                 <div class="card">
                     <div class="card-body">
-                        <p>{{sub.sub}}</p>
+                        <h2>{{ sub.created_on }}</h2>
+                        <p>{{ sub.sub }}</p>
                     </div>
                 </div>
                 {% endfor %}

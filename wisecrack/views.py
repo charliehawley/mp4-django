@@ -13,15 +13,18 @@ class PromptList(generic.ListView):
 
 
 class UserSubList(View):
-    def get(self, request, user, *args, **kwargs):
-        queryset = Sub.objects
-        # subs = get_object_or_404(queryset, number_of_upvotes=0)
-        
+    # model = Prompt
+    # queryset = Prompt.objects.order_by('-date')
+    # template_name = 'user_sub_list.html'
+    def get(self, request, pk, *args, **kwargs):
+        # queryset = Sub.objects
+        subs = Sub.objects.filter(user=pk)
+
         return render(
             request,
             "user_sub_list.html",
             {
-                "subs": queryset
+                "subs": subs
             }
         )
 
@@ -32,19 +35,28 @@ class PromptDetail(View):
         prompt = get_object_or_404(queryset, slug=slug)
         subs = Sub.objects.order_by('created_on')
         submitted = False
-        if prompt.subs_list.filter(pk=self.request.user.pk).exists():
-            submitted = True
-
-        return render(
-            request,
-            "prompt_detail.html",
-            {
-                "prompt": prompt,
-                "subs": subs,
-                "submitted": submitted,
-                "sub_form": SubForm()
-            }
-        )
+        if prompt.subs_list.filter(username=self.request.user.username).exists():
+            return render(
+                request,
+                "prompt_detail.html",
+                {
+                    "prompt": prompt,
+                    "subs": subs,
+                    "submitted": True,
+                    "sub_form": SubForm()
+                }
+            )
+        else:
+            return render(
+                request,
+                "prompt_detail.html",
+                {
+                    "prompt": prompt,
+                    "subs": subs,
+                    "submitted": False,
+                    "sub_form": SubForm()
+                }
+            )
 
     def post(self, request, slug, *args, **kwargs):
         queryset = Prompt.objects
@@ -123,5 +135,3 @@ class SubUpvote(View):
             #         "sub_form": sub_form
             #     }
             # )
-
-        
