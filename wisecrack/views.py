@@ -26,22 +26,13 @@ class UserSubList(View):
 
 
 class DeleteSub(View):
-    def post(self, request, pk, prompt, *args, **kwargs):
-        subs = Sub.objects.filter(user=pk)
-        del_sub = subs.get(prompt=prompt)
-        del_sub.delete()
+    def get(self, request, pk, sub, *args, **kwargs):
+        subs = Sub.objects.filter(user=pk, sub=sub)
+        # del_sub = subs.get(prompt=prompt)
+        subs.delete()
 
-        # delete_sub = DeleteSub(data=request.POST)
-
+        # delete_sub = DeleteSub(data=request.DELETE)
         return HttpResponseRedirect(reverse('user_sub_list', args=[pk]))
-
-        # return render(
-        #     request,
-        #     "user_sub_list.html",
-        #     {
-        #         "subs": subs
-        #     }
-        # )
 
 
 class PromptDetail(View):
@@ -132,16 +123,3 @@ class SubUpvote(View):
                 sub.upvotes.add(request.user)
                 # voted = False
                 return HttpResponseRedirect(reverse('prompt_detail', args=[slug]))
-
-            # sub_form = SubForm(data=request.POST)
-
-            # return render(
-            #     request,
-            #     "prompt_detail.html",
-            #     {
-            #         "prompt": prompt,
-            #         "subs": subs,
-            #         "voted": True,
-            #         "sub_form": sub_form
-            #     }
-            # )
