@@ -26,11 +26,11 @@ class UserSubList(View):
 
 
 class EditSub(View):
-    def get(self, request, prompt, pk, *args, **kwargs):
-        id = ''.join(x for x in prompt if x.isdigit())
-        prompt_id = Prompt.objects.filter(pk=id)
+    def get(self, request, prompt, pk, id, *args, **kwargs):
+        p_id = ''.join(x for x in prompt if x.isdigit())
+        prompt_id = Prompt.objects.filter(pk=p_id)
         sub = Sub.objects.filter(user=pk)
-        instance = get_object_or_404(Sub, user=pk)
+        instance = get_object_or_404(Sub, id=id)
         sub_form = SubForm(instance=instance)
 
         return render(
@@ -43,14 +43,14 @@ class EditSub(View):
             }
         )
 
-    def post(self, request, prompt, pk, *args, **kwargs):
-        id = ''.join(x for x in prompt if x.isdigit())
+    def post(self, request, prompt, pk, id, *args, **kwargs):
+        p_id = ''.join(x for x in prompt if x.isdigit())
         # prompt = Prompt.objects.filter(pk=id)
-        prompt = get_object_or_404(Prompt, pk=id)
+        prompt = get_object_or_404(Prompt, pk=p_id)
         slug = prompt.slug
         
         sub = Sub.objects.filter(user=pk)
-        instance = get_object_or_404(Sub, user=pk)
+        instance = get_object_or_404(Sub, id=id)
         subs = Sub.objects.filter(user=pk)
 
         sub_form = SubForm(data=request.POST, instance=instance)

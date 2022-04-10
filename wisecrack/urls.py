@@ -9,7 +9,7 @@ urlpatterns = [
          name='sub_upvote'),
     path('sub-list/<int:pk>/', views.UserSubList.as_view(),
          name='user_sub_list'),
-    path('<str:prompt>/<int:pk>', views.EditSub.as_view(), name='edit_sub'),
+    path('<str:prompt>/<int:pk>/<int:id>', views.EditSub.as_view(), name='edit_sub'),
     path('delete-sub/<int:pk>/<str:sub>', views.DeleteSub.as_view(),
          name='delete_sub')
 ]

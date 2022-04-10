@@ -25,5 +25,5 @@ class SubAdmin(admin.ModelAdmin):
     in database.
     '''
 
-    list_display = ('sub', 'user', 'prompt')
+    list_display = ('sub', 'user', 'prompt', 'pk')
     list_filter = ('prompt',)
