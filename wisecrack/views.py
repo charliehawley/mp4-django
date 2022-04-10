@@ -91,7 +91,6 @@ class PromptDetail(View):
         subbed_users = []
         for user in subs:
             subbed_users.append(user)
-            print(user)
 
         if request.user.username in subbed_users:
             submitted = True
@@ -153,16 +152,16 @@ class PromptDetail(View):
 class SubUpvote(View):
     def post(self, request, slug, pk, user, *args, **kwargs):
         sub = get_object_or_404(Sub, pk=pk)
+        prompt = get_object_or_404(Prompt, slug=slug)
+        prompt_pk = prompt.pk
         if request.user.username == user:
-            return HttpResponseRedirect(reverse('prompt_detail', args=[slug]))
+            return HttpResponseRedirect(reverse('prompt_detail', args=[slug, prompt_pk]))
         else:
             if sub.upvotes.filter(id=request.user.id).exists():
                 sub.upvotes.remove(request.user)
                 # voted = True
-                return HttpResponseRedirect(reverse('prompt_detail',
-                                                    args=[slug]))
+                return HttpResponseRedirect(reverse('prompt_detail', args=[slug, prompt_pk]))
             else:
                 sub.upvotes.add(request.user)
                 # voted = False
-                return HttpResponseRedirect(reverse('prompt_detail',
-                                                    args=[slug]))
+                return HttpResponseRedirect(reverse('prompt_detail', args=[slug, prompt_pk]))
