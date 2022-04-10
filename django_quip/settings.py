@@ -29,7 +29,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['wisecrack-django.herokuapp.com', 'localhost']
 
@@ -54,8 +54,7 @@ INSTALLED_APPS = [
 
     'django.contrib.staticfiles',
     'crispy_forms',
-    # 'fontawesomefree'
-    # 'cloudinary',
+    'cloudinary',
 ]
 
 SITE_ID = 1
@@ -88,7 +87,7 @@ ROOT_URLCONF = 'django_quip.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR.joinpath('templates')],
+        'DIRS': [TEMPLATES_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
