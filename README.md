@@ -1,5 +1,8 @@
 # Wisecrack
 
+Wisecrack is a place for friends to meet and compete for upvotes. In this quirky quiz-style game, prompts are given and the users are encouraged to go wild. Wisecrack requires a broad imagination and is sure to test your wit.
+See how many votes you can garner on [Wisecrack](https://wisecrack-django.herokuapp.com/).
+
 ## submission properties: 
 - datetime class properties which are used to restrict multiple submissions in a single day 
 - number of subs for a given prompt must be converted to a list, then length of list used to show how many subs per prompt in index.html

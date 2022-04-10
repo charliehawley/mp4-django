@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
-# from django.contrib import messages
 from .models import Prompt, Sub
 from .forms import SubForm
 
@@ -45,7 +44,6 @@ class EditSub(View):
 
     def post(self, request, prompt, pk, id, *args, **kwargs):
         p_id = ''.join(x for x in prompt if x.isdigit())
-        # prompt = Prompt.objects.filter(pk=id)
         prompt = get_object_or_404(Prompt, pk=p_id)
         slug = prompt.slug
         
@@ -69,20 +67,10 @@ class EditSub(View):
             request,
             "user_sub_list.html",
             {
-                # "prompt": prompt,
                 "subs": subs,
-                # "slug": slug,
-                # "submitted": True,
                 "sub_form": sub_form
             }
         )
-        # return render(
-        #     request,
-        #     "user_sub_list.html",
-        #     {
-        #         "subs": subs
-        #     }
-        # )
 
 
 class DeleteSub(View):
@@ -90,7 +78,6 @@ class DeleteSub(View):
         subs = Sub.objects.filter(user=pk, sub=sub)
         subs.delete()
 
-        # delete_sub = DeleteSub(data=request.DELETE)
         return HttpResponseRedirect(reverse('user_sub_list', args=[pk]))
 
 

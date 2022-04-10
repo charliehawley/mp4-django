@@ -1,13 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
-# from cloudinary.models import CloudinaryField
 
 
 class Prompt(models.Model):
     date = models.DateField(auto_now=True)
-    prompt = models.TextField(
-        max_length=300, null=False, blank=False,
-        unique=True, default="What's the crack?")
+    prompt = models.TextField(max_length=300,
+                              null=False, blank=False,
+                              unique=True, default="What's the crack?")
     slug = models.SlugField(max_length=200, unique=True)
     subs_list = models.ManyToManyField(
         User, related_name='prompt_sub', blank=True)
@@ -19,8 +18,8 @@ class Prompt(models.Model):
 class Sub(models.Model):
     sub = models.TextField(max_length=150, null=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    upvotes = models.ManyToManyField(
-        User, related_name='sub_upvote', blank=True)
+    upvotes = models.ManyToManyField(User, related_name='sub_upvote',
+                                     blank=True)
     prompt = models.ForeignKey(Prompt, default=None, on_delete=models.CASCADE)
     created_on = models.DateField(auto_now=True)
 
