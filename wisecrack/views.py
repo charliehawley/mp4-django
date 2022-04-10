@@ -95,10 +95,10 @@ class DeleteSub(View):
 
 
 class PromptDetail(View):
-    def get(self, request, slug, *args, **kwargs):
+    def get(self, request, slug, pk, *args, **kwargs):
         queryset = Prompt.objects
         prompt = get_object_or_404(queryset, slug=slug)
-        subs = Sub.objects.order_by('created_on')
+        subs = Sub.objects.filter(prompt=pk).order_by('created_on')
         submitted = False
 
         subbed_users = []
@@ -123,7 +123,7 @@ class PromptDetail(View):
     def post(self, request, slug, *args, **kwargs):
         queryset = Prompt.objects
         prompt = get_object_or_404(queryset, slug=slug)
-        subs = Sub.objects.order_by('created_on')
+        subs = Sub.objects.filter(prompt=pk).order_by('created_on')
         # submitted = False
         # if prompt.subs_list.filter(id=self.request.user.id).exists():
         #     submitted = True
