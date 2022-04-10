@@ -26,76 +26,64 @@ class UserSubList(View):
 
 
 class EditSub(View):
-    # model = Sub
-    # template_name = 'edit_sub.html'
-    # fields = ['sub']
 
     def get(self, request, prompt, pk, *args, **kwargs):
         id = ''.join(x for x in prompt if x.isdigit())
-        prompt = Prompt.objects.filter(pk=id)
-        # prompt = get_object_or_404(queryset, slug=slug)
-        # sub.user = user.pk
+        prompt_id = Prompt.objects.filter(pk=id)
         sub = Sub.objects.filter(user=pk)
-        # sub_form = SubForm(data=request.POST)
+        instance = get_object_or_404(Sub, user=pk)
+        sub_form = SubForm(instance=instance)
 
         return render(
             request,
             "edit_sub.html",
             {
-                "prompt": prompt,
+                "prompt": prompt_id,
                 "sub": sub,
+                "sub_form": sub_form
+            }
+        )
+
+    def post(self, request, prompt, pk, *args, **kwargs):
+        id = ''.join(x for x in prompt if x.isdigit())
+        # prompt = Prompt.objects.filter(pk=id)
+        prompt = get_object_or_404(Prompt, pk=id)
+        slug = prompt.slug
+        
+        sub = Sub.objects.filter(user=pk)
+        instance = get_object_or_404(Sub, user=pk)
+        subs = Sub.objects.filter(user=pk)
+
+        sub_form = SubForm(data=request.POST, instance=instance)
+        
+        if sub_form.is_valid():
+            sub_form.instance.user = request.user
+            sub_form.instance.name = request.user.username
+            sub = sub_form.save(commit=False)
+            sub.prompt = prompt
+            prompt.slug = slug
+            sub.save()
+        else:
+            sub_form = SubForm()
+
+        return render(
+            request,
+            "user_sub_list.html",
+            {
+                # "prompt": prompt,
+                "subs": subs,
+                # "slug": slug,
                 # "submitted": True,
                 "sub_form": sub_form
             }
         )
         # return render(
         #     request,
-        #     "edit_sub.html",
+        #     "user_sub_list.html",
         #     {
-        #         "sub_form": SubForm()
+        #         "subs": subs
         #     }
         # )
-
-        # def post(self, request, pk, sub, slug, *args, **kwargs):
-        #     queryset = Prompt.objects
-        #     prompt = get_object_or_404(queryset, slug=slug)
-        #     # submitted = False
-        #     # if prompt.subs_list.filter(id=self.request.user.id).exists():
-        #     #     submitted = True
-
-        #     sub_form = SubForm(data=request.POST)
-
-        #     # if submitted:
-        #     #     return render(
-        #     #         request,
-        #     #         "edit_sub.html",
-        #     #         {
-        #     #             # "prompt": prompt,
-        #     #             # "subs": subs,
-        #     #             # "submitted": True,
-        #     #             "sub_form": sub_form
-        #     #         }
-        #     #     )
-        #     # else:
-        #     if sub_form.is_valid():
-        #         sub_form.instance.user = request.user
-        #         sub_form.instance.name = request.user.username
-        #         sub_edit = sub_form.save(commit=False)
-        #         prompt.slug = slug
-        #         sub_edit.save()
-        #     else:
-        #         sub_form = SubForm()
-
-        #     return render(
-        #         request,
-        #         "edit_sub.html",
-        #         {
-        #             # "prompt": prompt,
-        #             # "subs": subs,
-        #             # "submitted": False,
-        #             "sub_form": sub_form
-        #         }
-        #     )
 
 
 class DeleteSub(View):
@@ -122,7 +110,7 @@ class PromptDetail(View):
 
         if request.user.username in subbed_users:
             submitted = True
-            
+
         return render(
             request,
             "prompt_detail.html",
