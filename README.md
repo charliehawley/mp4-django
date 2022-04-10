@@ -1,6 +1,6 @@
 # Wisecrack
 
-Wisecrack is a place for friends to meet and compete for upvotes. In this quirky quiz-style game, prompts are given and the users are encouraged to go wild. Wisecrack requires a broad imagination and is sure to test your wit.
+Wisecrack is a place for friends to meet and compete for upvotes. In this quirky quiz-style game, prompts are given and the users are encouraged to go wild. Wisecrack requires a broad imagination and is sure to test your wit. <br>
 See how many votes you can garner on [Wisecrack](https://wisecrack-django.herokuapp.com/).
 
 ## submission properties: 
