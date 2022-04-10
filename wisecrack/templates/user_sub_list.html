@@ -4,8 +4,6 @@
 
 <div class="container-fluid">
     <div class="row">
-
-        <!-- Prompts -->
         <div class="col-12">
             <div class="row">
                 <h1>Your submissions:</h1>
@@ -13,8 +11,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h2>{{ sub.created_on }}</h2>
-                        <p>"{{ sub.sub }}"</p>
-                        <button type="submit" class="d-inline btn-info">Edit</button>
+                        <p><strong>"{{ sub.sub }}"</strong></p>
+                        <a href="{% url 'edit_sub' sub.prompt user.pk %}"><button type="submit" class="d-inline btn-info">Edit</button></a>
                         <a href="{% url 'delete_sub' user.pk sub.sub %}"><button type="submit" class="d-inline btn-danger">Delete</button></a>
                     </div>
                 </div>

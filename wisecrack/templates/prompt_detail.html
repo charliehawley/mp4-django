@@ -47,8 +47,8 @@
                     {% if user.is_authenticated %}
                         {% if submitted %}
                         <p><strong>You have already submitted</strong></p>
+                        
                         {% else %}
-
                         <h3>Submit a response:</h3>
                         <p>Posting as: {{ user.username }}</p>
                         <form method="post">
@@ -56,6 +56,7 @@
                             {% csrf_token %}
                             <button type="submit" value="{{ user.pk }}" class="btn btn-signup btn-lg">Submit</button>
                         </form>
+                        
                         {% endif %}
                     {% else %}
                     <p>You must <a href="{% url 'account_login' %}">login</a>/<a
