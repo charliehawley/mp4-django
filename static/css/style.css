@@ -11,3 +11,11 @@
     clear: both;
     height: 80px;
 }
+
+/* Media queries */
+@media screen and (max-width: 380px) {
+    #reveal_content_footer {
+        clear:both;
+        height: 150px;
+    }
+}

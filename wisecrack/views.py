@@ -120,7 +120,7 @@ class PromptDetail(View):
             }
         )
 
-    def post(self, request, slug, *args, **kwargs):
+    def post(self, request, slug, pk, *args, **kwargs):
         queryset = Prompt.objects
         prompt = get_object_or_404(queryset, slug=slug)
         subs = Sub.objects.filter(prompt=pk).order_by('created_on')
