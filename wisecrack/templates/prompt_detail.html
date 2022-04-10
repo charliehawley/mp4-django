@@ -12,9 +12,9 @@
                     <div class="card-body">
                         <h2>{{ prompt.prompt }}</h2>
                         <span>{{ prompt.date }}</span>
-                        {% with subs.count as total_subs %}
+                        <!-- {% with subs.count as total_subs %}
                         <span>Subs: {{ total_subs }}</span>
-                        {% endwith %}
+                        {% endwith %} -->
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                         <!-- {% if voted %}
                         <button type="submit" name="sub_pk" value="{{sub.pk}}" class="upvote"
                             title="unvote">-</button>
-                            
+
                         {% else %} -->
                         <button type="submit" name="sub_pk" value="{{sub.pk}}" class="upvote"
                             title="upvote">+</button>
@@ -46,10 +46,10 @@
             <div class="card col-lg-6 col-sm-12 offset-lg-3 mb-2">
                 <div class="card-body p-1">
                     {% if user.is_authenticated %}
-                        {% if submitted %}
+                        <!-- {% if submitted %}
                         <p><strong>You have already submitted</strong></p>
                         
-                        {% else %}
+                        {% else %} -->
                         <h3>Submit a response:</h3>
                         <p>Posting as: {{ user.username }}</p>
                         <form method="post">
@@ -58,7 +58,7 @@
                             <button type="submit" value="{{ user.pk }}" class="btn btn-signup btn-lg">Submit</button>
                         </form>
                         
-                        {% endif %}
+                        <!-- {% endif %} -->
                     {% else %}
                     <p>You must <a href="{% url 'account_login' %}">login</a>/<a
                             href="{% url 'account_signup' %}">register</a> to submit a response.</p>
