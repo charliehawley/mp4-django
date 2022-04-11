@@ -53,18 +53,59 @@ Authenticated users can navigate to a page hosting all of their submissions, whe
 
 ![user submissions page](/doc_media/my_subs.jpg)
 
-## submission properties: 
-- datetime class properties which are used to restrict multiple submissions in a single day 
-- number of subs for a given prompt must be converted to a list, then length of list used to show how many subs per prompt in index.html
+- ### Login/Register pages
+Users can register using forms with validation on usernames and matching passwords.
+Messages are thrown for success and failure.
 
-## upvote properties:
-- upvote user id list boolean check user id presence in list to restrict user from upvoting a submission more than once.
-- upvote appends user id to list[], number of upvotes = user_upvote.length()
+## Future Features
+- Message for attempt at upvoting user's own submission.
+- Restrict user from submitting multiple submissions per prompt to avoid user's monopolising a prompt.
+- More intuitive link content. Prompts should have titles in their models to give context to users.
+- It would be more engaging to have timers implemented on prompts so that submission state can finish at a set date/time.
+- Submissions on prompt details page could be ordered by upvotes, creating a leaderboard-style layout. Users can see 'the one to beat.'
+- Email notifications for when your submission is knocked off a 'Top 3' podium.
+- Avatars to more easily associate submissions to users and embolden rivalries.
+- Badges applied to account for holding the top of the leaderboard at deadline.#
+
+## Testing
+All testing was manual on this site. A TDD approach was adopted but undocumented.
+
+## Prompt properties:
+- Date: documents creation date to calculate active prompt's age. Future feature would remove ability to submit after predetermined deadline.
+- Prompt: the content of the prompt for the users to respond to.
+- Slug: auto-generated from the prompt to serve to the url hosting the prompt and relevant submissions.
+- Subs list: a many to many field that records users who have submitted. Future feature would restrict submission form if current user's username features on this list.
+
+## Submission properties: 
+- Sub: the content of the submission for user's to read and vote on.
+- User: a foreign key referencing the ownership of the submission.
+- Upvotes: a many to many field that records the users who have upvoted this submission.
+- Created on: a date field that records creation date.
 
 ## Known bugs
 
-- sub field remains populated after submission
+- Submission field remains populated after post method returns page.
+
+## Languages
+- HTML5
+- CSS3
+- Python
+
+## Frameworks and Libraries
+- Git
+- Github
+- Django
+- dj_database_url
+- dj allauth
+- dj crispy forms
+- Bootstrap
+- Gunicorn
+- Cloudinary
 
 ## Resources
 
-- https://getbootstrap.com/docs/
+- Getbootstrap documentation
+- Stack Overflow:
+    - Return only digits from variables
+    - Endless resources on how to manage views and return reverse statemnets in particular
+- Django documentation
