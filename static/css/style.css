@@ -1,3 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400&family=Suez+One&display=swap');
+
+body {
+    background-color:hsla(161,95%,85%,1);
+    background-image:
+        radial-gradient(at 3% 94%, hsla(257,100%,78%,1) 0px, transparent 50%),
+        radial-gradient(at 51% 0%, hsla(3,100%,88%,1) 0px, transparent 50%),
+        radial-gradient(at 99% 97%, hsla(304,100%,78%,1) 0px, transparent 50%);
+}
+
+.logo{
+    font-size: 2rem;
+    font-family: 'Suez One', serif;
+}
+
+.sub {
+    font-size: 1.5rem;
+    font-weight: 300;
+    font-family: 'Kalam', cursive; 
+}
+
 .upvote {
     width: 30px;
     height: 30px;

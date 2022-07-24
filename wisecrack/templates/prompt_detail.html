@@ -22,7 +22,7 @@
             {% for sub in subs %}
             <div class="card col-lg-6 col-sm-12 offset-lg-3 mb-2 subs">
                 <div class="card-body p-1">
-                    <p><strong>"{{ sub.sub }}"</strong></p>
+                    <p class="sub"><strong>"{{ sub.sub }}"</strong></p>
                     <p class="user-tag"><strong>Author: </strong>{{ sub.user }}</p>
                     <span><strong>Upvotes: </strong>{{ sub.number_of_upvotes }}</span>
                     {% if user.is_authenticated %}
