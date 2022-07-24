@@ -18,16 +18,16 @@
                         you clever sausage.</p>
                 </div>
                 {% for prompt in prompt_list %}
-                <div class="card col-lg-6 col-sm-12 offset-lg-3 mt-2">
-                    <div class="card-body">
-                        <h2>
-                            <a href="{% url 'prompt_detail' prompt.slug prompt.pk %}">
-                                {{ prompt.date }}
-                            </a>
-                        </h2>
-                        <p><strong>{{ prompt.prompt }}</strong></p>
+                <a href="{% url 'prompt_detail' prompt.slug prompt.pk %}">
+                    <div class="card col-lg-6 col-sm-12 offset-lg-3 mt-2">
+                        <div class="card-body">
+                            <h2>
+                                    {{ prompt.date }}
+                            </h2>
+                            <p><strong>{{ prompt.prompt }}</strong></p>
+                        </div>
                     </div>
-                </div>
+                </a>
                 {% endfor %}
             </div>
         </div>

@@ -21,23 +21,37 @@
             <!-- Active submissions -->
             {% for sub in subs %}
             <div class="card col-lg-6 col-sm-12 offset-lg-3 mb-2 subs">
+                <div class="card-header prompt-user">
+                    <div class="row">
+                        <div class="col">
+                            <p class="user-tag"><strong><i class="fa-solid fa-circle-user"></i> {{ sub.user }}</strong></p>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body p-1">
-                    <p class="sub"><strong>"{{ sub.sub }}"</strong></p>
-                    <p class="user-tag"><strong>Author: </strong>{{ sub.user }}</p>
-                    <span><strong>Upvotes: </strong>{{ sub.number_of_upvotes }}</span>
-                    {% if user.is_authenticated %}
-                    <form class="d-inline" action="{% url 'sub_upvote' prompt.slug sub.pk sub.user %}" method="POST">
-                        {% csrf_token %}
-                        <!-- {% if voted %}
-                        <button type="submit" name="sub_pk" value="{{sub.pk}}" class="upvote"
-                            title="unvote">-</button>
+                    <!--  -->
+                    <div class="row">
+                        <div class="col-9">
+                            <p class="sub"><strong>"{{ sub.sub }}"</strong></p>
+                        </div>
+                        <!--  -->
+                        <div class="col-3 align-self-center">
+                            <span><strong>Upvotes: </strong>{{ sub.number_of_upvotes }}</span>
+                            {% if user.is_authenticated %}
+                            <form class="d-inline" action="{% url 'sub_upvote' prompt.slug sub.pk sub.user %}" method="POST">
+                                {% csrf_token %}
+                                <!-- {% if voted %}
+                                <button type="submit" name="sub_pk" value="{{sub.pk}}" class="upvote"
+                                    title="unvote">-</button>
 
-                        {% else %} -->
-                        <button type="submit" name="sub_pk" value="{{sub.pk}}" class="upvote" title="upvote">+</button>
+                                {% else %} -->
+                                <button type="submit" name="sub_pk" value="{{sub.pk}}" class="upvote" title="upvote">+</button>
 
-                        <!-- {% endif %} -->
-                    </form>
-                    {% endif %}
+                                <!-- {% endif %} -->
+                            </form>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
             </div>
             {% endfor %}
