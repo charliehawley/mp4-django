@@ -3,7 +3,7 @@ Python Unittests for models
 '''
 import unittest
 from datetime import date
-from models import Prompt
+from .models import Prompt
 
 
 class TestPrompt(unittest.TestCase):

@@ -24,7 +24,7 @@
                 <div class="card-header prompt-user">
                     <div class="row">
                         <div class="col">
-                            <p class="user-tag"><strong><i class="fa-solid fa-face-smile"></i> {{ sub.user }}</strong></p>
+                            <p class="user-tag"><strong><i class="fa-solid fa-user"></i> {{ sub.user }}</strong></p>
                         </div>
                     </div>
                 </div>
@@ -64,11 +64,11 @@
                         
                         {% else %} -->
                         <h3>Submit a response:</h3>
-                        <p>Posting as: {{ user.username }}</p>
+                        <p><i class="fa-solid fa-user"></i> {{ user.username }}</p>
                         <form method="post">
                             {{ sub_form | crispy }}
                             {% csrf_token %}
-                            <button type="submit" value="{{ user.pk }}" class="btn btn-signup btn-lg">Submit</button>
+                            <button type="submit" value="{{ user.pk }}" class="btn btn-info">Submit</button>
                         </form>
                         
                         <!-- {% endif %} -->

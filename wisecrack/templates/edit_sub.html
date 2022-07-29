@@ -7,12 +7,13 @@
         <div class="col-12">
             <div class="card col-lg-6 col-sm-12 offset-lg-3 mb-2">
                 <div class="card-body p-1">
+                    <h2>{{ sub.prompt.prompt }}</h2>
                     <h3>Your response:</h3>
-                    <p>Posting as: {{ user.username }}</p>
+                    <p><i class="fa-solid fa-user"></i> {{ user.username }}</p>
                     <form method="post">
                         {{ sub_form | crispy }}
                         {% csrf_token %}
-                        <button type="submit" value="{{ prompt.slug }}" class="btn btn-signup btn-lg">Update</button>
+                        <button type="submit" value="{{ prompt.slug }}" class="btn btn-info">Update</button>
                     </form>
                 </div>
             </div>
