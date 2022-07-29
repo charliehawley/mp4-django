@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.sites',
 
-    'wisecrack',
 
     'allauth',
     'allauth.account',
@@ -47,6 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'cloudinary',
+
+    'wisecrack',
 ]
 
 SITE_ID = 1

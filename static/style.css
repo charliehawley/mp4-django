@@ -15,11 +15,19 @@ body {
 
 .logo{
     font-size: 2rem;
-    /* font-family: 'Suez One', serif; */
 }
 
 .card {
-    color: #333;
+    color: #222;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.head-nav {
+    height: 8vh;
+}
+
+.container-fluid {
+    height: 92vh;
 }
 
 .sub {
