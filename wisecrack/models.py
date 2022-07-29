@@ -14,6 +14,8 @@ class Prompt(models.Model):
     def __int__(self):
         return self.date
 
+    def return_prompt(self):
+        return self.prompt
 
 class Sub(models.Model):
     sub = models.TextField(max_length=150, null=False)

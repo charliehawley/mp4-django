@@ -1,5 +1,27 @@
 {
   "dependencies": {
+    "node.js": "^0.0.1-security",
+    "nodejs": "^0.0.0",
     "startbootstrap-small-business": "^5.0.5"
-  }
+  },
+  "name": "mp4-django",
+  "description": "Wisecrack is a place for friends to meet and compete for upvotes. In this quirky quiz-style game, prompts are given and the users are encouraged to go wild.  Wisecrack requires a broad imagination and is sure to test your wit. <br> See how many votes you can garner on [Wisecrack](https://wisecrack-django.herokuapp.com/).",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "jest": "^28.1.3"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charliehawley/mp4-django.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/charliehawley/mp4-django/issues"
+  },
+  "homepage": "https://github.com/charliehawley/mp4-django#readme"
 }
