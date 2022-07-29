@@ -3,7 +3,7 @@ Python Unittests for models
 '''
 import unittest
 from datetime import date
-from .models import Prompt
+from models import Prompt
 
 
 class TestPrompt(unittest.TestCase):
@@ -17,7 +17,7 @@ class TestPrompt(unittest.TestCase):
         today = date.today()
         prompt = Prompt(today, 'How much wood would a woodchuck chuck?')
 
-        self.assertEqual(prompt.return_prompt,
+        self.assertEqual(self.prompt.return_prompt,
                          'How much wood would a woodchuck chuck?')
 
 
