@@ -33,7 +33,7 @@ body {
     height: 30px;
     border-radius: 50%;
     padding: none;
-    border: none;
+    border: solid 1px #000;
     background-color: bisque;
 }
 
@@ -45,6 +45,10 @@ body {
 
 .user-tag {
     margin: 0;
+}
+
+.sub-list-subs {
+    font-size: 1.5rem;
 }
 
 #reveal-content-footer {

@@ -19,7 +19,7 @@ class UserSubList(View):
             request,
             "user_sub_list.html",
             {
-                "subs": subs
+                "subs": subs,
             }
         )
 

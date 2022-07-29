@@ -17,8 +17,8 @@
                 {% for sub in subs %}
                 <div class="card col-lg-6 col-sm-12 offset-lg-3 mt-2 text-center">
                     <div class="card-body">
-                        <h2>{{ sub.prompt }}</h2>
-                        <p><strong>"{{ sub.sub }}"</strong></p>
+                        <h2>{{ sub.prompt.prompt }}</h2>
+                        <p class="sub"><strong>"{{ sub.sub }}"</strong></p>
                         <a href="{% url 'edit_sub' sub.prompt user.pk sub.id %}"><button type="submit"
                                 class="d-inline btn-info">Edit</button></a>
                         <a href="{% url 'delete_sub' user.pk sub.sub %}"><button type="submit"
