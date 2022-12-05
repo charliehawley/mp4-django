@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Prompt, Sub
 from .forms import SubForm
 
@@ -24,7 +25,10 @@ class UserSubList(View):
         )
 
 
-class EditSub(View):
+class EditSub(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
+    
     def get(self, request, prompt, pk, id, *args, **kwargs):
         p_id = ''.join(x for x in prompt if x.isdigit())
         prompt_id = Prompt.objects.filter(pk=p_id)
