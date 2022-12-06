@@ -8,7 +8,7 @@
         <!-- Prompts -->
         <div class="col-12">
             <div class="row">
-                <div class="card col-lg-6 col-sm-12 offset-lg-3 mt-2">
+                <div class="card col-lg-7 col-sm-12 offset-lg-3 mt-2">
                     <h1>Welcome to Wisecrack</h1>
                     <h3>Think you've got what it takes to hog upvotes?
                         Prove it!</h3>
@@ -18,16 +18,16 @@
                         you clever sausage.</p>
                 </div>
                 {% for prompt in prompt_list %}
-                <a href="{% url 'prompt_detail' prompt.slug prompt.pk %}">
-                    <div class="card col-lg-6 col-sm-12 offset-lg-3 mt-2">
+                <div class="card col-lg-7 col-sm-12 offset-lg-3 mt-2">
+                    <a href="{% url 'prompt_detail' prompt.slug prompt.pk %}">
                         <div class="card-body">
                             <h2>
                                 <p>{{ prompt.prompt }}</p>
                             </h2>
                             <p><strong>{{ prompt.date }}</strong></p>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
                 {% endfor %}
             </div>
         </div>

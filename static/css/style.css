@@ -5,11 +5,10 @@ a {
 }
 
 body {
-    background-color:hsla(161,95%,85%,1);
-    background-image:
-        radial-gradient(at 3% 94%, hsla(257,100%,78%,1) 0px, transparent 50%),
-        radial-gradient(at 51% 0%, hsla(3,100%,88%,1) 0px, transparent 50%),
-        radial-gradient(at 99% 97%, hsla(304,100%,78%,1) 0px, transparent 50%);
+    background-color:#818181;
+    background-image: url("https://i.imgur.com/NtsK1oF.png");
+    background-size: cover;
+    background-repeat: repeat-y;
     font-family: 'Cubano', Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -35,7 +34,7 @@ body {
 
 .card {
     color: #222;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
 }
 
 .container-fluid {
@@ -78,6 +77,7 @@ body {
 
 @media screen and (max-width:991px) {
     .nav-drop-container{
+        flex-wrap: nowrap !important;
         height: 15vh;
         width: auto;
         position: relative;
