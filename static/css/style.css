@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&family=Kalam:wght@300;400&family=Suez+One&display=swap');
+@import url("https://use.typekit.net/odw1cig.css");
 
 a {
     text-decoration: none;
@@ -10,11 +10,27 @@ body {
         radial-gradient(at 3% 94%, hsla(257,100%,78%,1) 0px, transparent 50%),
         radial-gradient(at 51% 0%, hsla(3,100%,88%,1) 0px, transparent 50%),
         radial-gradient(at 99% 97%, hsla(304,100%,78%,1) 0px, transparent 50%);
-    font-family: 'IM Fell DW Pica', serif;
+    font-family: 'Cubano', Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .logo{
     font-size: 2rem;
+}
+
+.nav-list{
+    flex-direction: column !important;
+}
+
+.nav-drop-container{
+    justify-content: baseline; /* NECESSARY ?? */
+    height: 30vh;
+    width: 25vw;
+    flex-wrap: wrap !important;
+    position: fixed;
+}
+
+.navbar-collapse{
+    flex-grow: 0;
 }
 
 .card {
@@ -29,7 +45,7 @@ body {
 .sub {
     font-size: 1.5rem;
     font-weight: 300;
-    font-family: 'Kalam', cursive; 
+    font-family: Helvetica, Arial, sans-serif; 
 }
 
 .upvote {
@@ -42,8 +58,13 @@ body {
 }
 
 .prompt-user {
+    font-weight: 200;
     font-size: 1.2rem;
+    letter-spacing: 2px;
     color: #F7F7F7;
+    box-shadow: 5px 5px #000;
+    position: relative;
+    offset-position: -5px !important;
     background-color: #545454;
 }
 
@@ -53,4 +74,12 @@ body {
 
 .sub-list-subs {
     font-size: 1.5rem;
+}
+
+@media screen and (max-width:991px) {
+    .nav-drop-container{
+        height: 15vh;
+        width: auto;
+        position: relative;
+}
 }
