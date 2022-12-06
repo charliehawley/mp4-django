@@ -45,6 +45,7 @@ body {
     font-size: 1.5rem;
     font-weight: 300;
     font-family: Helvetica, Arial, sans-serif; 
+    text-transform: capitalize;
 }
 
 .upvote {
@@ -73,6 +74,12 @@ body {
 
 .sub-list-subs {
     font-size: 1.5rem;
+}
+
+.card {
+    position: absolute !important;
+    left: 25vw;
+    top: 25vw;
 }
 
 @media screen and (max-width:991px) {

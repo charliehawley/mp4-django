@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Prompt, Sub
 from .forms import SubForm
@@ -12,7 +12,10 @@ class PromptList(generic.ListView):
     template_name = 'prompt_list.html'
 
 
-class UserSubList(View):
+class UserSubList(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
+
     def get(self, request, pk, *args, **kwargs):
         subs = Sub.objects.filter(user=pk)
 
@@ -77,7 +80,10 @@ class EditSub(LoginRequiredMixin, View):
         )
 
 
-class DeleteSub(View):
+class DeleteSub(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
+
     def get(self, request, pk, sub, *args, **kwargs):
         subs = Sub.objects.filter(user=pk, sub=sub)
         subs.delete()
@@ -154,7 +160,10 @@ class PromptDetail(View):
             )
 
 
-class SubUpvote(View):
+class SubUpvote(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
+
     def post(self, request, slug, pk, user, *args, **kwargs):
         sub = get_object_or_404(Sub, pk=pk)
         prompt = get_object_or_404(Prompt, slug=slug)
@@ -170,3 +179,6 @@ class SubUpvote(View):
                 sub.upvotes.add(request.user)
                 voted = False
                 return HttpResponseRedirect(reverse('prompt_detail', args=[slug, prompt_pk]))
+
+def error_404_handler(request, exception):
+    return render(request, 'templates/404.html')
