@@ -76,12 +76,7 @@ body {
     font-size: 1.5rem;
 }
 
-.card {
-    position: absolute !important;
-    left: 25vw;
-    top: 25vw;
-}
-
+/* -------------media query fix navbar on small devices------------- */
 @media screen and (max-width:991px) {
     .nav-drop-container{
         flex-wrap: nowrap !important;
